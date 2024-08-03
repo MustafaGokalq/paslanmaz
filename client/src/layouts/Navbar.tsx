@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
         </div>
         {
           language && (
-            <div className='absolute top-10 bg-black bg-opacity-50 rounded text-white font-bold border w-32'>
+            <div className='absolute top-10 bg-black bg-opacity-50 rounded text-white font-bold border w-32 z-50'>
               <ul className='flex justify-center items-center flex-col cursor-pointer'>
                 <li className='w-full hover:bg-darkDanger transition-all'>En</li>
                 <li className='w-full hover:bg-darkDanger transition-all'>Fr</li>
