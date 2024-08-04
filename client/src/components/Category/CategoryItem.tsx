@@ -1,18 +1,25 @@
-import React from 'react'
-import { FaChevronRight } from "react-icons/fa";
+import React from "react";
 
-
-const CategoryItem: React.FC = () => {
-  return (
-    <div className=' flex w-full'>
-        <div className='p-2 w-full hover:bg-darkDanger hover:text-white transition-all cursor-pointer flex justify-between items-center '>
-            <p>Paslanmaz Çelik</p>
-            <span>
-                <FaChevronRight />
-            </span>
-        </div>
-    </div>
-  )
+interface IProps {
+  item: {
+    img: string;
+    name: string;
+  };
 }
 
-export default CategoryItem
+const CategoryItem: React.FC<IProps> = ({ item }) => {
+  return (
+    <>
+      <div className=" relative h-[120px] rounded-xl border-2 border-black bg-secondary shadow stroke-black">
+        <div className=" flex justify-center items-center h-full ">
+          <img src={item.img} alt={item.name} />
+        </div>
+      </div>
+      <div className=" bg-darkSecondary text-white font-bold mt-4 rounded-xl border-2 border-black flex justify-center items-center w-full">
+        <p>{item.name}</p>
+      </div>
+    </>
+  );
+};
+
+export default CategoryItem;

@@ -1,57 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import img1 from "../../assets/img1.png";
+import img2 from "../../assets/img2.png";
+import img3 from "../../assets/img3.png";
+import img4 from "../../assets/img4.png";
+import img5 from "../../assets/img5.png";
+import Slider from "react-slick";
+import { FaChevronCircleRight } from "react-icons/fa";
+import { FaChevronCircleLeft } from "react-icons/fa";
+import './slider.css'
+
+
+interface IImage {
+  img: string;
+  title: string;
+}
+
+const images: IImage[] = [
+  { img: img1, title: "Soğutma Tüneli Endüstiriyel" },
+  { img: img2, title: "Soğutma Tüneli Endüstiriyel2" },
+  { img: img3, title: "Soğutma Tüneli Endüstiriyel3" },
+  { img: img4, title: "Soğutma Tüneli Endüstiriyel4" },
+  { img: img5, title: "Soğutma Tüneli Endüstiriyel5" },
+];
 
 const MainSlider: React.FC = () => {
-  const [slideIndex, setSlideIndex] = useState<number>(0);
+  const [activeImage, setActiveImage] = useState<IImage>(images[0]);
 
-  const slider = [
-    { index: 0, image: 'https://s3-alpha-sig.figma.com/img/1832/dcc0/d71e34a2e8e99d7d72159935b415c0d1?Expires=1723420800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mvWffgSJUq6hgrvoRjtJ9MSnim~WiUlxAm6JdufAILSa9duainSBfZO5C7iwBjHtZgs5Fojwkgwq5yymBtWswOp6uUcXYHAxkdfGscXKExwEjFR2pRAm0bVCoM4vJIOegsyrG~bRJjUajQ43AtCLsxWJrHHkIOGBI2KyPEZ89VPWuMHxjEzlEEGk4Sy5ObaHhU~vtWnGl-MlJS9tRq90BEJIh3O6pZ1o5w7C2yzODikqgvkVFrBTj70cBD8BqfX1Tp3VE4m~q6UN98B8AIgGXgg5-cpyshMHYCUcI19ME08OImkeKWUn5kGM0QDFzcpx6iKM-woB1RGRBomZTFLj-g__', title: 'Paslanmaz Karıştırıcı' },
-    { index: 1, image: 'https://s3-alpha-sig.figma.com/img/b629/f094/13d93c300fb9a6dc99975be164c8e842?Expires=1723420800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YVhFQ2kjODtF9RsqN31WPeBof4P39byvxw0w816LldzbQ~TRN~xcp9bTeddrhdJX9Ee6e8BBdgGvXqkLhil8TSiqGsv6yTu12EUyFszck6nMbLPntPUwYNkcQmNwm~PBmf79jINedVnJqu6Gqv8Ahdg-rwpazam6PpG6LY0xeVVXMJhcy6btpErd9iQIMeRBQBvpY506h0-NZH8MwaX5zJqwB7FETCLg4prPpSZDHoiW9D5PAFNUMn1FIfhTYZu7T0J0~zHxGop-FmHxhUkQCyNO~8DCsbTVpeoW1IdNnQVHKg698l9Lt1Px6Mg-R4a1n9bYODM6SyqQMJ6PGk~rVA__', title: 'Paslanmaz Çikolata Kazanı' },
-    { index: 2, image: 'https://s3-alpha-sig.figma.com/img/457b/46ef/8260cd938d0bd2438bb40caf965a064c?Expires=1723420800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CeXUCzmdQZnNQU2THRVLto~1GpeoaoBogdRjSvJBv1t~A8hBpvAk9yO3kI2LvBlKTM~XJh1wUOgihtLKAJ9ms-jwhaG3SqR2panL1IZ4ZxsaQGH~0T5y76nvKdNdGm0n~1uVYdd4NrFytstH2ZTbGAJUbXLC3HFkSDZ6yMiJCSUDHIqxZvUZ8qbQluKkXcvEQayl0gU86teEY-LRemwf2TSyKmpY~Hjur6pgLzqXl~n~Af4KlABqVwgE~ia0Zs6q~ZoAfvj7KlZN8CxalvHx9mvOiLXFZ~yHy8heNdGQVHb2-0hoyMHa7UD5kclk3cbIs3o6EPABMx4UeUCvwuIESg__', title: 'Paslanmaz Soğutma Tüneli' },
-  ];
-
-  const nextSlide = () => {
-    setSlideIndex((prevIndex) =>
-      prevIndex === slider.length - 1 ? 0 : prevIndex + 1
-    );
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 1,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          infinite: true,
+        }
+      }
+    ]
   };
 
-  const prevSlide = () => {
-    setSlideIndex((prevIndex) =>
-      prevIndex === 0 ? slider.length - 1 : prevIndex - 1
+  function SampleNextArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <FaChevronCircleRight className={`${className} custom-prev-arrow text-darkDanger hover:text-black`} onClick={onClick} style={{ ...style, display: "block", background: "" }}/>
     );
+  }
+
+  function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <FaChevronCircleLeft className={`${className} custom-prev-arrow text-darkDanger hover:text-black`} onClick={onClick} style={{ ...style, display: "block", background: "" }}/>
+    );
+  }
+
+  const handleImageClick = (item: IImage) => {
+    setActiveImage(item);
   };
 
   return (
-    <div className='relative h-[400px] shadow-lg rounded-lg overflow-hidden select-none'>
-      {/* Slider Image */}
-      <div className='h-full w-full'>
-        <img
-          src={slider[slideIndex].image}
-          alt={slider[slideIndex].title}
-          className='w-full object-center h-[300px]'
-        />
+    <div className="relative border-2 border-black rounded-3xl bg-black bg-opacity-20 shadow shadow-black md:w-[574px]">
+      <div className="w-full h-full flex justify-center items-center">
+        <img src={activeImage.img} alt={activeImage.title} className="h-[300px]" />
       </div>
 
-      {/* Slider Title */}
-      <div className='absolute bottom-0 left-0 w-full bg-darkDanger text-white text-center p-4'>
-        <h2 className='text-2xl font-bold'>{slider[slideIndex].title}</h2>
+      <div className="slider-container w-full">
+        <Slider {...settings}>
+          {images.map((item, i) => (
+            <div key={i} className={`border-2 border-black p-2 rounded-lg w-16 h-16 flex justify-center bg-black bg-opacity-20 mx-4 items-center cursor-pointer ${activeImage === item ? "border-darkDanger border-2" : ""}`} onClick={() => handleImageClick(item)}>
+              <img src={item.img} alt={item.title} className="w-full h-full"/>
+            </div>
+          ))}
+        </Slider>
       </div>
 
-      {/* Previous Button */}
-      <button
-        onClick={prevSlide}
-        className='absolute top-1/2 left-4 transform -translate-y-1/2 bg-darkDanger hover:bg-black transition-all text-white p-2 rounded-full'
-      >
-        &lt;
-      </button>
-
-      {/* Next Button */}
-      <button
-        onClick={nextSlide}
-        className='absolute top-1/2 right-4 transform -translate-y-1/2 bg-darkDanger hover:bg-black transition-all text-white p-2 rounded-full'
-      >
-        &gt;
-      </button>
+      <div className="absolute top-0 left-0 right-0 w-full bg-black bg-opacity-30 rounded-t-2xl flex justify-center items-center px-4 text-darkDanger font-bold text-2xl">
+        <h2>{activeImage.title}</h2>
+      </div>
     </div>
   );
 };

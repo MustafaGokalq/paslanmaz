@@ -31,7 +31,8 @@ export default {
          primary: '#2B2E4A',
          danger: '#E84545',
          darkDanger: '#903749',
-         secondary: '#686D76',
+         secondary: '#D9D9D9',
+         darkSecondary: '#686D76'
       }
     },
   },
