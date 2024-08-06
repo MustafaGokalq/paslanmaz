@@ -3,7 +3,7 @@ import React from 'react'
 const ProductItem: React.FC = () => {
   return (
     <div className='flex flex-col justify-between rounded-xl relative w-full h-[466px] p-2'>
-        <div className=' !h-[368px] border-2  border-black rounded-2xl bg-secondary '>
+        <div className=' !h-[368px] border  border-black rounded-2xl bg-secondary '>
             <img src="https://s3-alpha-sig.figma.com/img/07f2/c3de/a11a5361956df6778ae2a270fa512eda?Expires=1723420800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CKDuJ8MdmLy3ybnUC8vzK4vpd-3PbM6M~dRi27cuYT1H664R04KOg~dcfISJZlX48c02RfaS5IUwvQZ3tPsTdM70-5Wm7NqQijT5e5iTyhSASoQOEfoLYiHCwOfuJBsAjNpfVTIRcgxDCK3KLq~V6bwOaltLj3ZvLRr6BTRfYM4h4ETIJAkqAS4wkQVPuFZ8myfKHHctwO-BM6DiIuNjIE3C~jfRZiiRYfc6Wiai5L7KnDuBOUDqLMuA1ehe3MUNJsZWfELoX-o~u5pv~bjueZIsfEu~vdd1hdykWWpTPA1AKUlUkC3dJSPiLS8Ga-giCRodtuJBT6AQnKADXkDEkw__" alt="" />
         </div>
 

@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
 
           <div className=" w-full md:flex-[2]">
               <Categories />
-              <div className=" w-full border-2 border-darkDanger my-3"></div>
+              <div className=" w-full border border-darkDanger my-3"></div>
               <Categories />
           </div>
         </div>
@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
           <ProductWithVideo />
         </div>
 
-        <div className=" w-full border-2 border-darkDanger my-3"></div>
+        <div className=" w-full border border-darkDanger my-3"></div>
 
 
         <div>
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
 
-        <div className=" w-full border-2 border-darkDanger my-3"></div>
+        <div className=" w-full border border-darkDanger my-3"></div>
 
 
         <div>
@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
 
-        <div className=" w-full border-2 border-darkDanger my-3"></div>
+        <div className=" w-full border border-darkDanger my-3"></div>
 
     </div>
   );

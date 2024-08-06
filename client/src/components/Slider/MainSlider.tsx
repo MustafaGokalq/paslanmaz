@@ -67,14 +67,16 @@ const MainSlider: React.FC = () => {
   function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
-      <FaChevronCircleRight className={`${className} custom-prev-arrow text-darkDanger hover:text-black`} onClick={onClick} style={{ ...style, display: "block", background: "" }}/>
+      <FaChevronCircleRight className={`${className} custom-prev-arrow text-darkDanger hover:text-black `} onClick={onClick} style={{ ...style, display: "block", background: "", top: "50%", transform: "translateY(-50%)" }}/>
     );
   }
 
   function SamplePrevArrow(props: any) {
     const { className, style, onClick } = props;
+    console.log(className, 'ASDSADSA');
+    console.log(style, 'STYLE')
     return (
-      <FaChevronCircleLeft className={`${className} custom-prev-arrow text-darkDanger hover:text-black`} onClick={onClick} style={{ ...style, display: "block", background: "" }}/>
+      <FaChevronCircleLeft className={`${className} custom-prev-arrow text-darkDanger hover:text-black`} onClick={onClick} style={{ ...style, display: "block", background: "", top: "50%", transform: "translateY(-50%)" }}/>
     );
   }
 
@@ -83,7 +85,7 @@ const MainSlider: React.FC = () => {
   };
 
   return (
-    <div className="relative border-2 border-black rounded-3xl bg-black bg-opacity-20 shadow shadow-black md:w-[574px]">
+    <div className="relative border border-black rounded-3xl bg-black bg-opacity-20 shadow shadow-black md:w-[574px]">
       <div className="w-full h-full flex justify-center items-center">
         <img src={activeImage.img} alt={activeImage.title} className="h-[300px]" />
       </div>

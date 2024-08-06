@@ -1,0 +1,5 @@
+.custom-next-arrow,
+.custom-prev-arrow {
+  position: absolute;
+  z-index: 1;
+}

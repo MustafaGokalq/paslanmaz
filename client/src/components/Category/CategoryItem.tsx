@@ -10,12 +10,12 @@ interface IProps {
 const CategoryItem: React.FC<IProps> = ({ item }) => {
   return (
     <>
-      <div className=" relative h-[120px] rounded-xl border-2 border-black bg-secondary shadow stroke-black">
+      <div className=" relative h-[120px] rounded-xl border border-black bg-secondary shadow stroke-black">
         <div className=" flex justify-center items-center h-full ">
           <img src={item.img} alt={item.name} />
         </div>
       </div>
-      <div className=" bg-darkSecondary text-white font-bold mt-4 rounded-xl border-2 border-black flex justify-center items-center w-full">
+      <div className=" bg-darkSecondary text-white font-bold mt-4 rounded-xl border border-black flex justify-center items-center w-full">
         <p>{item.name}</p>
       </div>
     </>
