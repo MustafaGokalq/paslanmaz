@@ -3,9 +3,9 @@ import Document from "mongoose";
 interface IProduct extends Document{
     name:string,
     description:string,
-    price:string,
+    price?:string,
     imageUrl:string,
-    stock:number,
+    video?:string,
     isClick:number,
     isFlash:boolean
 }
