@@ -1,7 +1,7 @@
-import mongoose, { mongo, Schema } from "mongoose";
-import IProduct from "../types/type";
+import mongoose, {Schema } from "mongoose";
+import IProduct from "../types/productType";
 
-const productSchema: Schema = new mongoose.Schema({
+const productSchema: Schema = new Schema<IProduct>({
   name: {
     type: String,
     require: true,
@@ -12,13 +12,16 @@ const productSchema: Schema = new mongoose.Schema({
   },
   price: {
     type: String,
-    require: true,
+    require: false,
   },
   imageUrl: {
     type: String,
     require: true,
   },
-  stock: { type: Number },
+  video:{
+    type:String,
+    require:false
+  },
   isClick: { type: Number, default:0 },
   isFlash: { type: Boolean },
 },{
