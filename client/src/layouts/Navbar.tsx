@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
   const [language, setLanguage] = useState<boolean>(false);
   const languageMenuRef = useRef<HTMLDivElement>(null);
 
-  const links = ['Anasayfa', 'Kurumsal', 'Ürünler', 'Video', 'İletişim'];
+  const links = ['anasayfa', 'Kurumsal', 'Ürünler', 'Video', 'İletişim'];
 
   const handleSetActiveLink = (link: string) => {
     setActiveLink(link);

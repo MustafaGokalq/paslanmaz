@@ -1,8 +1,5 @@
 import React from 'react'
 import ProductItem from './ProductItem'
-import { FaChevronCircleLeft } from "react-icons/fa";
-import { FaChevronCircleRight } from "react-icons/fa";
-
 
 
 const Products: React.FC = () => {
