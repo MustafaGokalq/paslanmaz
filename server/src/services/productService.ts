@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import Product from "../models/productModel";
 import IProduct from "../types/productType";
+import emailService from "../utils/emailService";
 
 class ProductService {
   //fetch all product
@@ -89,7 +90,6 @@ class ProductService {
     }
   }
 
-
   //flash product
   async getIsFlashProducts() {
     try {
@@ -119,6 +119,15 @@ class ProductService {
       throw new Error("Error fetching most clicked product");
     }
   }
+
+  //purchaseProduct
+  async purchaseProduct(productId: string): Promise<void> {
+    const product = await Product.findById(productId);
+    if(!product){
+      throw new Error("Product Not Found");
+    }
+    await emailService.sendProductPurchaseEmail(product.name)
+  };
 }
 
 export default new ProductService();
