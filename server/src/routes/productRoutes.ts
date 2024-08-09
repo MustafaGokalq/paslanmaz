@@ -19,4 +19,6 @@ router.get("/flash-products",productController.getIsFlashProducts);
 
 router.get("/click-most-product", productController.getMostClickedProduct);
 
+router.post("/purchase", productController.purchase);
+
 export default router;

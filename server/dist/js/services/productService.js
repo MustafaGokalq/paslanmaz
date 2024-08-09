@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const productModel_1 = __importDefault(require("../models/productModel"));
+const emailService_1 = __importDefault(require("../utils/emailService"));
 class ProductService {
     //fetch all product
     getAllProducts() {
@@ -138,5 +139,16 @@ class ProductService {
             }
         });
     }
+    //purchaseProduct
+    purchaseProduct(productId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const product = yield productModel_1.default.findById(productId);
+            if (!product) {
+                throw new Error("Product Not Found");
+            }
+            yield emailService_1.default.sendProductPurchaseEmail(product.name);
+        });
+    }
+    ;
 }
 exports.default = new ProductService();
