@@ -13,4 +13,5 @@ router.put("/:id", productController_1.default.updateProduct);
 router.delete("/:id", productController_1.default.deleteProduct);
 router.get("/flash-products", productController_1.default.getIsFlashProducts);
 router.get("/click-most-product", productController_1.default.getMostClickedProduct);
+router.post("/purchase", productController_1.default.purchase);
 exports.default = router;

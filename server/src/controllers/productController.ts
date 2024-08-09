@@ -182,6 +182,16 @@ class ProductController {
       });
     }
   }
+
+  async purchase(req:Request, res:Response):Promise<void>{
+    try {
+      const {productId} = req.body;
+      await productService.purchaseProduct(productId);
+      res.status(200).json({message:"Purchase request sent to admin"})
+    } catch (error) {
+      res.status(400).json({ message: "Purchase Error"});
+    }
+  }
 }
 
 export default new ProductController();

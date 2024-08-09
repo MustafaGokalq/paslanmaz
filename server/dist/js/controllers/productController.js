@@ -204,5 +204,17 @@ class ProductController {
             }
         });
     }
+    purchase(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { productId } = req.body;
+                yield productService_1.default.purchaseProduct(productId);
+                res.status(200).json({ message: "Purchase request sent to admin" });
+            }
+            catch (error) {
+                res.status(400).json({ message: "Purchase Error" });
+            }
+        });
+    }
 }
 exports.default = new ProductController();

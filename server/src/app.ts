@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import db from "./config/database";
 import indexRoute from "./routes/index";
-
+import apiLimiter from "./middlewares/rateLimit";
 
 dotenv.config();
 
@@ -15,8 +15,11 @@ const port: any = process.env.PORT || 3000;
 app.use(express.json())
 app.use(cors())
 
+app.use("/api", apiLimiter)
+
 //routes
 app.use("/api",indexRoute);
+
 
 app.listen(port ,():void=>{
     db();
