@@ -1,6 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ProductItem: React.FC = () => {
+
+    const navigate = useNavigate();
+    const id = 'try';
+
   return (
     <div className='flex flex-col justify-between rounded-xl relative w-full h-[466px] p-2'>
         <div className=' !h-[368px] border  border-black rounded-2xl bg-secondary '>
@@ -14,7 +19,7 @@ const ProductItem: React.FC = () => {
         </div>
 
         <div className=' flex justify-end pr-4'>
-            <button className='  text-darkDanger font-semibold'>Devamı</button>
+            <button onClick={() => navigate(`/ürünDetay/${id}`)} className='  text-darkDanger font-semibold'>Devamı</button>
         </div>
 
         <div className=' z-10 absolute -top-3 font-bold -right-4 bg-darkDanger text-white font-gemunu p-2 rounded-lg'>

@@ -10,7 +10,7 @@ const videoRoutes_1 = __importDefault(require("./videoRoutes"));
 const adminRoutes_1 = __importDefault(require("./adminRoutes"));
 const router = express_1.default.Router();
 router.use('/products', productRoutes_1.default);
-router.use('/category', categoryRoutes_1.default);
+router.use('/categories', categoryRoutes_1.default);
 router.use("/video", videoRoutes_1.default);
 router.use("/admin", adminRoutes_1.default);
 exports.default = router;
