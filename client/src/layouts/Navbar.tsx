@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
   const [language, setLanguage] = useState<boolean>(false);
   const languageMenuRef = useRef<HTMLDivElement>(null);
 
-  const links = ['Anasayfa', 'Kurumsal', 'Ürünler', 'Video', 'İletişim'];
+  const links = ['Anasayfa', 'Kurumsal', 'Ürünler', 'Video', 'Iletişim'];
 
   const handleSetActiveLink = (link: string) => {
     setActiveLink(link);
@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
               key={i}
               className={`cursor-pointer ${
                 activeLink === link ? 'bg-darkDanger' : 'bg-darkSecondary'
-              } text-white hover:bg-darkDanger p-2 rounded-lg flex justify-center items-center w-20 mb-2 md:mb-0`}
+              } text-white hover:bg-darkDanger transition-all p-2 rounded-lg flex justify-center items-center w-20 mb-2 md:mb-0`}
               onClick={() => handleSetActiveLink(link)}
             >
               <Link to={`/${link.toLowerCase()}`}>{link}</Link>

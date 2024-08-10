@@ -73,8 +73,6 @@ const MainSlider: React.FC = () => {
 
   function SamplePrevArrow(props: any) {
     const { className, style, onClick } = props;
-    console.log(className, 'ASDSADSA');
-    console.log(style, 'STYLE')
     return (
       <FaChevronCircleLeft className={`${className} custom-prev-arrow text-darkDanger hover:text-black`} onClick={onClick} style={{ ...style, display: "block", background: "", top: "50%", transform: "translateY(-50%)" }}/>
     );
