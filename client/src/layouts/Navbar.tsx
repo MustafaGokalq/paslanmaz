@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
     <div className='flex items-center justify-between p-4 text-black border-b-2 border-darkDanger relative z-20'>
       {/* LOGO */}
       <div className='text-4xl font-bold font-gemunu'>
-        PASLANMAZ
+        <Link to={'/anasayfa'}>PASLANMAZ</Link>
       </div>
 
       {/* HAMBURGER ICON */}
