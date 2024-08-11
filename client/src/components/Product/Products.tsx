@@ -1,21 +1,40 @@
 import React from 'react'
 import ProductItem from './ProductItem'
-import { FaChevronCircleLeft } from "react-icons/fa";
-import { FaChevronCircleRight } from "react-icons/fa";
-
+import { useGetAllProductsQuery } from '../../redux/services/productApi'
+import Loading from '../Helpers/Loading';
+import { IProduct } from '../../types/types';
 
 
 const Products: React.FC = () => {
-  return (
-    <div className=' grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-5 md:gap-y-0 relative'>
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
+  const {data: productData, isLoading} = useGetAllProductsQuery();
 
-      <div className=' absolute top-1/2 hidden md:flex justify-between w-full text-3xl text-darkDanger' >
-        <FaChevronCircleLeft className='cursor-pointer'/>
-        <FaChevronCircleRight className='cursor-pointer '/>
+  let content; 
+
+  if(isLoading) {
+    content = (
+      <div className=' w-full h-full flex justify-center'>
+        <Loading />
       </div>
+    )
+  }else {
+    content = (
+      <div>
+        {
+          productData?.products.map((product: IProduct) => (
+            <div key={product._id}>
+                <ProductItem product={product}/>
+            </div>
+          ))
+        }
+      </div>
+    )
+  }
+
+  return (
+    <div className=' grid grid-cols-2 md:grid-cols-5 gap-x-5 gap-y-5 md:gap-y-0 relative'>
+      {
+        content
+      }
     </div>
   )
 }

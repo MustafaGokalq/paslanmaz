@@ -13,6 +13,7 @@ const productSchema: Schema<IProduct> = new Schema<IProduct>({
     ref: "Category",
     required: true,
   },
+
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Admin",
@@ -20,6 +21,27 @@ const productSchema: Schema<IProduct> = new Schema<IProduct>({
   }
 }, {
   timestamps: true,
+
+  description: {
+    type: String,
+    require: true,
+  },
+  price: {
+    type: Number,
+    require: false,
+  },
+  imageUrl: {
+    type: String,
+    require: true,
+  },
+  video:{
+    type:String,
+    require:false
+  },
+  isClick: { type: Number, default:0 },
+  isFlash: { type: Boolean },
+},{
+    timestamps:true
 });
 
 export default mongoose.model<IProduct>("Product", productSchema);

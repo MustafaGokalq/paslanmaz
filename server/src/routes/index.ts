@@ -9,7 +9,7 @@ import authorize from '../middlewares/authorize';
 const router: Router = express.Router();
 
 router.use('/products', productRoute);
-router.use('/category',categoryRoute);
+router.use('/categories',categoryRoute);
 router.use("/video",videoRoute);
 router.use("/admin",adminRoute);
 router.use("/static",staticContetentRoute);
