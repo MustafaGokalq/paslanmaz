@@ -14,6 +14,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const productService_1 = __importDefault(require("../services/productService"));
 class ProductController {
+    getProductsWithVideo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { categoryId } = req.params;
+                const products = yield productService_1.default.getProductsWithVideo(categoryId);
+                res.json(products);
+            }
+            catch (error) {
+                res.status(500).json({ error: "Videolu ürünler getirilemedi" });
+            }
+        });
+    }
+    getProductsWithoutVideo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { categoryId } = req.params;
+                const products = yield productService_1.default.getProductsWithoutVideo(categoryId);
+                res.json(products);
+            }
+            catch (error) {
+                res.status(500).json({ error: "Videosuz ürünler getirilemedi" });
+            }
+        });
+    }
     //get all product
     getAllProducts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -73,11 +97,18 @@ class ProductController {
     createProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const product = yield productService_1.default.createProduct(req.body);
+                const { role, _id } = req.user;
+                if (role !== "superAdmin" && role !== "admin") {
+                    return res.status(403).json({
+                        success: false,
+                        message: "Bu işlemi gerçekleştirme yetkiniz yok",
+                    });
+                }
+                const product = yield productService_1.default.createProduct(req.body, _id); // _id'yi ekleyin
                 if (!product) {
                     return res.status(400).json({
                         success: false,
-                        message: "Error creating product",
+                        message: "Ürün oluşturulurken hata oluştu",
                     });
                 }
                 return res.status(201).json({
@@ -86,10 +117,11 @@ class ProductController {
                 });
             }
             catch (error) {
-                console.error("Error creating product:", error); // Hata loglama
+                console.error("Ürün oluşturulurken hata oluştu:", error);
                 return res.status(500).json({
                     success: false,
-                    message: "Server Error",
+                    message: "Sunucu hatası",
+                    error: " error.message" || error,
                 });
             }
         });
@@ -98,29 +130,44 @@ class ProductController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = req.params;
+                const { role, _id } = req.user;
                 if (!id) {
                     return res.status(400).json({
                         success: false,
-                        message: "Product ID is Required",
+                        message: "Product ID is required",
                     });
                 }
-                const updatedProduct = yield productService_1.default.updateProduct(id, req.body);
-                if (!updatedProduct) {
+                const product = yield productService_1.default.getProductById(id);
+                if (!product) {
                     return res.status(404).json({
                         success: false,
                         message: "Product Not Found",
                     });
                 }
+                if (role === "superAdmin") {
+                    const updatedProduct = yield productService_1.default.updateProduct(id, req.body);
+                    return res.status(200).json({
+                        success: true,
+                        updatedProduct,
+                    });
+                }
+                if (product.createdBy.toString() !== _id.toString()) {
+                    return res.status(403).json({
+                        success: false,
+                        message: "Bu ürünü düzenleme yetkiniz yok",
+                    });
+                }
+                const updatedProduct = yield productService_1.default.updateProduct(id, req.body);
                 return res.status(200).json({
                     success: true,
                     updatedProduct,
                 });
             }
             catch (error) {
-                console.error("Error updating video:", error);
+                console.error("Error updating product:", error);
                 return res.status(500).json({
                     success: false,
-                    message: "Internal Server Error",
+                    message: "Server Error",
                 });
             }
         });
@@ -129,54 +176,62 @@ class ProductController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = req.params;
+                const { role, _id } = req.user;
                 if (!id) {
                     return res.status(400).json({
                         success: false,
-                        message: "Producct ID is required",
+                        message: "Ürün ID'si gerekli",
+                    });
+                }
+                const product = yield productService_1.default.getProductById(id);
+                if (!product) {
+                    return res.status(404).json({
+                        success: false,
+                        message: "Ürün bulunamadı",
+                    });
+                }
+                if (role === "superAdmin") {
+                    // SuperAdmin her ürünü silebilir
+                    const deletedProduct = yield productService_1.default.deleteProduct(id);
+                    return res.status(200).json({
+                        success: true,
+                        message: "Ürün başarıyla silindi",
+                        deletedProduct,
+                    });
+                }
+                if (product.createdBy.toString() !== _id.toString()) {
+                    // Admin sadece kendi ürünlerini silebilir
+                    return res.status(403).json({
+                        success: false,
+                        message: "Bu ürünü silme yetkiniz yok",
                     });
                 }
                 const deletedProduct = yield productService_1.default.deleteProduct(id);
-                if (!deletedProduct) {
-                    return res.status(404).json({
-                        success: false,
-                        message: "Product not found",
-                    });
-                }
                 return res.status(200).json({
                     success: true,
-                    message: "Product deleted successfully",
+                    message: "Ürün başarıyla silindi",
+                    deletedProduct,
                 });
             }
             catch (error) {
-                console.error("Error deleting product:", error);
+                console.error("Ürün silme hatası:", error);
                 return res.status(500).json({
                     success: false,
-                    message: "Internal Server Error",
+                    message: "İç Sunucu Hatası",
                 });
             }
         });
     }
-    getIsFlashProducts(req, res) {
+    //product category
+    getProductsByCategory(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const flashProducts = yield productService_1.default.getIsFlashProducts();
-                if (!flashProducts || flashProducts.length === 0) {
-                    return res.status(404).json({
-                        success: false,
-                        message: "Flash products not found",
-                    });
-                }
-                return res.status(200).json({
-                    success: true,
-                    products: flashProducts,
-                });
+                const { categoryId } = req.params;
+                const products = yield productService_1.default.getProductsByCategory(categoryId);
+                res.json(products);
             }
             catch (error) {
-                console.error("Error fetching flash products:", error); // Hata loglama
-                return res.status(500).json({
-                    success: false,
-                    message: "Server Error",
-                });
+                res.status(500).json({ error: "Ürünler getirilemedi" });
             }
         });
     }

@@ -8,6 +8,6 @@
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*","src/express.d.ts"],
     "exclude": ["src/types/*.ts", "node_modules", ".vscode"]
   }

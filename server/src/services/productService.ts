@@ -1,9 +1,19 @@
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import Product from "../models/productModel";
 import IProduct from "../types/productType";
 import emailService from "../utils/emailService";
 
 class ProductService {
+  //videolu produclar
+  async getProductsWithVideo(categoryId: string) {
+    return await Product.find({ categoryId, videoUrl: { $exists: true, $ne: "" } });
+}
+//videosuz produclar
+async getProductsWithoutVideo(categoryId: string) {
+    return await Product.find({ categoryId, videoUrl: { $exists: false } });
+}
+
+
   //fetch all product
   async getAllProducts() {
     try {
@@ -32,22 +42,20 @@ class ProductService {
   }
 
   //create product
-  async createProduct(productBody: IProduct) {
+  async createProduct(productBody: IProduct, createdBy: mongoose.Schema.Types.ObjectId) {
     try {
-
       const product = {
         name: productBody.name,
         description: productBody.description,
         price: productBody.price,
         imageUrl: productBody.imageUrl,
-        video: productBody.video,
+        videoUrl: productBody.videoUrl,
         isClick: productBody.isClick,
-        isFlash: productBody.isFlash,
+        categoryId: productBody.categoryId,
+        createdBy: productBody.createdBy,
       };
-
+  
       const newProduct = await Product.create(product);
-
-   
       return newProduct;
     } catch (error) {
       console.error("Error creating product:", error);
@@ -90,20 +98,11 @@ class ProductService {
     }
   }
 
-  //flash product
-  async getIsFlashProducts() {
-    try {
-
-      const isFlashProducts = await Product.find({ isFlash: true });
-
-      if (isFlashProducts.length === 0) return null;
-      return isFlashProducts;
-    } catch (error) {
-      console.error("Error fetching flash products:", error);
-      throw new Error("Error fetching flash products");
-    }
-  }
-
+  //category product
+  async getProductsByCategory(categoryId: string) {
+    return await Product.find({ categoryId });
+}
+  
   //most click
   async getMostClickedProduct() {
     try {

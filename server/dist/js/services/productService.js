@@ -16,6 +16,18 @@ const mongoose_1 = require("mongoose");
 const productModel_1 = __importDefault(require("../models/productModel"));
 const emailService_1 = __importDefault(require("../utils/emailService"));
 class ProductService {
+    //videolu produclar
+    getProductsWithVideo(categoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield productModel_1.default.find({ categoryId, videoUrl: { $exists: true, $ne: "" } });
+        });
+    }
+    //videosuz produclar
+    getProductsWithoutVideo(categoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield productModel_1.default.find({ categoryId, videoUrl: { $exists: false } });
+        });
+    }
     //fetch all product
     getAllProducts() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,7 +60,7 @@ class ProductService {
         });
     }
     //create product
-    createProduct(productBody) {
+    createProduct(productBody, createdBy) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const product = {
@@ -56,9 +68,10 @@ class ProductService {
                     description: productBody.description,
                     price: productBody.price,
                     imageUrl: productBody.imageUrl,
-                    video: productBody.video,
+                    videoUrl: productBody.videoUrl,
                     isClick: productBody.isClick,
-                    isFlash: productBody.isFlash,
+                    categoryId: productBody.categoryId,
+                    createdBy: productBody.createdBy,
                 };
                 const newProduct = yield productModel_1.default.create(product);
                 return newProduct;
@@ -107,19 +120,10 @@ class ProductService {
             }
         });
     }
-    //flash product
-    getIsFlashProducts() {
+    //category product
+    getProductsByCategory(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const isFlashProducts = yield productModel_1.default.find({ isFlash: true });
-                if (isFlashProducts.length === 0)
-                    return null;
-                return isFlashProducts;
-            }
-            catch (error) {
-                console.error("Error fetching flash products:", error);
-                throw new Error("Error fetching flash products");
-            }
+            return yield productModel_1.default.find({ categoryId });
         });
     }
     //most click

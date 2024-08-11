@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const adminModel_1 = __importDefault(require("../models/adminModel"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 class AdminService {
-    registerAdmin(name, email, password) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let admin = yield adminModel_1.default.findOne({ email });
+    registerAdmin(username_1, email_1, password_1) {
+        return __awaiter(this, arguments, void 0, function* (username, email, password, role = "admin") {
+            let admin = yield adminModel_1.default.findOne({ username });
             if (admin) {
                 throw new Error('Admin already exists');
             }
-            admin = new adminModel_1.default({ name, email, password });
+            admin = new adminModel_1.default({ username, email, password, role });
             yield admin.save();
             return admin;
         });
@@ -36,7 +36,7 @@ class AdminService {
             if (!isMatch) {
                 throw new Error('Invalid credentials');
             }
-            const token = jsonwebtoken_1.default.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+            const token = jsonwebtoken_1.default.sign({ id: admin._id, role: admin.role }, process.env.SECRET_KEY, { expiresIn: '1h' });
             return token;
         });
     }

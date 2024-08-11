@@ -1,31 +1,25 @@
-import mongoose, {Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import IProduct from "../types/productType";
 
-const productSchema: Schema = new Schema<IProduct>({
-  name: {
-    type: String,
-    require: true,
+const productSchema: Schema<IProduct> = new Schema<IProduct>({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: String, required: false },
+  imageUrl: { type: [String], required: true },
+  videoUrl: { type: String, required: false },
+  isClick: { type: Number, default: 0 },
+  categoryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    required: true,
   },
-  description: {
-    type: String,
-    require: true,
-  },
-  price: {
-    type: String,
-    require: false,
-  },
-  imageUrl: {
-    type: String,
-    require: true,
-  },
-  video:{
-    type:String,
-    require:false
-  },
-  isClick: { type: Number, default:0 },
-  isFlash: { type: Boolean },
-},{
-    timestamps:true
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Admin",
+    required: true,
+  }
+}, {
+  timestamps: true,
 });
 
 export default mongoose.model<IProduct>("Product", productSchema);

@@ -24,24 +24,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const productSchema = new mongoose_1.Schema({
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: String, required: false },
-    imageUrl: { type: [String], required: true },
-    videoUrl: { type: String, required: false },
-    isClick: { type: Number, default: 0 },
-    categoryId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Category",
-        required: true,
-    },
-    createdBy: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Admin",
-        required: true,
-    }
+const StaticContentSchema = new mongoose_1.Schema({
+    question1: { type: String, required: true, default: "1. Soru Kazan ne işe yarar?" },
+    answer1: { type: String, required: true, default: "Açıklama" },
+    question2: { type: String, required: true, default: "2. Soru ..." },
+    answer2: { type: String, required: true, default: "Açıklama" },
+    question3: { type: String, required: true, default: "3. Soru ..." },
+    answer3: { type: String, required: true, default: "Açıklama" },
+    question4: { type: String, required: true, default: "4. Soru ..." },
+    answer4: { type: String, required: true, default: "Açıklama" },
+    question5: { type: String, required: true, default: "5. Soru ..." },
+    answer5: { type: String, required: true, default: "Açıklama" }
 }, {
-    timestamps: true,
+    timestamps: true
 });
-exports.default = mongoose_1.default.model("Product", productSchema);
+exports.default = mongoose_1.default.model('StaticContent', StaticContentSchema);

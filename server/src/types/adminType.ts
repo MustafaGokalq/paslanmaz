@@ -1,8 +1,10 @@
-import { Document } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 
 export interface IAdmin extends Document {
-  name: string;
+  username: string;
   email: string;
   password: string;
+  _id:ObjectId;
+  role: "superAdmin" | "admin";
   comparePassword(password: string): Promise<boolean>;
 }
