@@ -7,7 +7,10 @@ import { FaYoutube } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
-    <div className=" grid grid-cols-5 gap-x-5">
+    <>
+    <div className=" w-full border border-darkDanger"></div>
+
+      <div className=" grid grid-cols-5 gap-x-5">
       <div className=" flex flex-col gap-y-3 border-r-2">
         <div className=" flex justify-start items-center gap-x-2 select-none cursor-pointer rounded-xl hover:bg-darkDanger hover:text-white transition-all">
           <div className="bg-darkDanger p-2 rounded-full">
@@ -46,7 +49,11 @@ const Footer: React.FC = () => {
       </div>
 
       <div>asdsa</div>
+
+      
     </div>
+    </>
+  
   );
 };
 

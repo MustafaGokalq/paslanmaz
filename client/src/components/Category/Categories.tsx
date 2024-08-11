@@ -1,19 +1,13 @@
 import React from 'react'
 import CategoryItem from './CategoryItem'
-import img2 from "../../assets/img2.png";
 import Slider from "react-slick";
 import { FaChevronCircleRight } from "react-icons/fa";
 import { FaChevronCircleLeft } from "react-icons/fa";
+import { useGetAllCategoriesQuery } from '../../redux/services/categoryApi';
 
 
 const Categories: React.FC = () => {
-
-  const categories = [
-    {img: img2, name: 'cat1'},
-    {img: img2, name: 'cat2'},
-    {img: img2, name: 'cat3'}
-  ]
-
+  const {data: categoryData} = useGetAllCategoriesQuery();
 
   const settings = {
     infinite: true,
@@ -71,9 +65,9 @@ const Categories: React.FC = () => {
       <div className='max-w-[730px]'>
           <div className="slider-container h-full">
             <Slider {...settings}>
-              {categories.map((item, i) => (
-                <div key={i} className=" ">
-                    <CategoryItem key={i} item={item}/>
+              {categoryData?.categories.map((category) => (
+                <div key={category._id} className=" ">
+                    <CategoryItem key={category._id} category={category}/>
                 </div>
               ))}
             </Slider>

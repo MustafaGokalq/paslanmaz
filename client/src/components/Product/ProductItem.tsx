@@ -9,14 +9,12 @@ interface IProps {
 }
 
 const ProductItem: React.FC<IProps> = ({product}) => {
-    console.log(product, "PRODUCT");
-
     const navigate = useNavigate();
 
   return (
     <div className='flex flex-col justify-between rounded-xl relative w-full h-[466px] p-2'>
-        <div className=' !h-[368px] border  border-black rounded-2xl bg-secondary p-1 '>
-            <img src={product.imageUrl} alt={product.name} className=' h-full w-full rounded-xl'/>
+        <div className=' !h-[368px] border  border-black rounded-2xl bg-secondary p-1 flex justify-center items-center'>
+            <img src={product.imageUrl} alt={product.name} className=' h-[300px] w-[190px] rounded-xl'/>
         </div>
 
         <div>

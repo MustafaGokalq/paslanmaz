@@ -13,7 +13,6 @@ const ProductPage: React.FC = () => {
       <Products />
       <div className=" w-full border border-darkDanger my-4"></div>
       <Products />
-      <div className=" w-full border border-darkDanger my-4"></div>
     </div>
   );
 };
