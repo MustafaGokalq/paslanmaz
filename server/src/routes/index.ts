@@ -4,7 +4,6 @@ import categoryRoute from "./categoryRoutes";
 import videoRoute from "./videoRoutes";
 import adminRoute from "./adminRoutes";
 import staticContetentRoute from "./staticContentRoute";
-import authorize from '../middlewares/authorize';
 
 const router: Router = express.Router();
 

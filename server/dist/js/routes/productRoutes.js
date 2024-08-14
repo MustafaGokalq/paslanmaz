@@ -15,7 +15,7 @@ router.get("/category/:categoryId/products", productController_1.default.getProd
 router.get("/category/:categoryId/products-with-video", productController_1.default.getProductsWithVideo);
 router.get("/category/:categoryId/products-without-video", productController_1.default.getProductsWithoutVideo);
 // Protected routes (require authentication and authorization)
-router.post("/", auth_1.default, (0, authorize_1.default)(["superAdmin", "admin"]), productController_1.default.createProduct);
+router.post("/", auth_1.default, productController_1.default.createProduct);
 router.put("/:id", auth_1.default, (0, authorize_1.default)(["superAdmin", "admin"]), productController_1.default.updateProduct);
 router.delete("/:id", auth_1.default, (0, authorize_1.default)(["superAdmin", "admin"]), productController_1.default.deleteProduct);
 router.post("/purchase", auth_1.default, productController_1.default.purchase); // Purchase işlemi sadece authenticated user gerektirir

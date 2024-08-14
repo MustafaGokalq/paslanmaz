@@ -19,7 +19,10 @@ class ProductService {
     //videolu produclar
     getProductsWithVideo(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield productModel_1.default.find({ categoryId, videoUrl: { $exists: true, $ne: "" } });
+            return yield productModel_1.default.find({
+                categoryId,
+                videoUrl: { $exists: true, $ne: "" },
+            });
         });
     }
     //videosuz produclar
@@ -63,21 +66,13 @@ class ProductService {
     createProduct(productBody, createdBy) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const product = {
-                    name: productBody.name,
-                    description: productBody.description,
-                    price: productBody.price,
-                    imageUrl: productBody.imageUrl,
-                    videoUrl: productBody.videoUrl,
-                    categoryId: productBody.categoryId,
-                    createdBy: productBody.createdBy,
-                };
-                const newProduct = yield productModel_1.default.create(product);
-                return newProduct;
+                console.log("Product Body in Service:", productBody);
+                const product = yield productModel_1.default.create(productBody);
+                return product;
             }
             catch (error) {
-                console.error("Error creating product:", error);
-                throw new Error("Error creating product");
+                console.error("Ürün oluşturulurken hata oluştu:", error);
+                throw new Error("Ürün oluşturulurken hata oluştu");
             }
         });
     }
@@ -135,6 +130,5 @@ class ProductService {
             yield emailService_1.default.sendProductPurchaseEmail(product.name);
         });
     }
-    ;
 }
 exports.default = new ProductService();

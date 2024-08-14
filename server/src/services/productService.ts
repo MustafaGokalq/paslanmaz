@@ -6,14 +6,15 @@ import IProduct from "../types/productType";
 class ProductService {
   //videolu produclar
   async getProductsWithVideo(categoryId: string) {
-    return await Product.find({ categoryId, videoUrl: { $exists: true, $ne: "" } });
-}
-//videosuz produclar
-async getProductsWithoutVideo(categoryId: string) {
+    return await Product.find({
+      categoryId,
+      videoUrl: { $exists: true, $ne: "" },
+    });
+  }
+  //videosuz produclar
+  async getProductsWithoutVideo(categoryId: string) {
     return await Product.find({ categoryId, videoUrl: { $exists: false } });
-}
-
-
+  }
   //fetch all product
   async getAllProducts() {
     try {
@@ -25,75 +26,71 @@ async getProductsWithoutVideo(categoryId: string) {
     }
   }
 
-  async getProductById(productId:string){
+  async getProductById(productId: string) {
     try {
-      if(!Types.ObjectId.isValid(productId)){
+      if (!Types.ObjectId.isValid(productId)) {
         throw new Error("Invalid product ID");
       }
       const product = await Product.findById(productId).exec();
-      if(!product){
+      if (!product) {
         return null;
       }
       return product;
     } catch (error) {
       console.error("Error fetching product by ID", error);
-      throw new Error("Error fetching product by ID")
+      throw new Error("Error fetching product by ID");
     }
   }
 
-   
   //create product
-  async createProduct(productBody: IProduct, createdBy: mongoose.Schema.Types.ObjectId) {
+async createProduct(productBody: IProduct, createdBy: mongoose.Schema.Types.ObjectId) {
     try {
-      const product = {
-        name: productBody.name,
-        description: productBody.description,
-        price: productBody.price,
-        imageUrl: productBody.imageUrl,
-        videoUrl: productBody.videoUrl,
-        categoryId: productBody.categoryId,
-        createdBy: productBody.createdBy,
-      };
-  
-      const newProduct = await Product.create(product);
-      return newProduct;
+      console.log("Product Body in Service:", productBody);
+        const product = await Product.create(productBody);
+        
+        return product;
     } catch (error) {
-      console.error("Error creating product:", error);
-      throw new Error("Error creating product");
+        console.error("Ürün oluşturulurken hata oluştu:", error);
+        throw new Error("Ürün oluşturulurken hata oluştu");
     }
-  }
+}
 
-  async updateProduct(productId:string, productBody:Partial<IProduct>){
+
+
+  async updateProduct(productId: string, productBody: Partial<IProduct>) {
     try {
-      if(!Types.ObjectId.isValid(productId)){
+      if (!Types.ObjectId.isValid(productId)) {
         throw new Error("Invalid Product ID");
       }
-      const updatedProduct = await Product.findByIdAndUpdate(productId, productBody,{
-        new: true,
-      }).exec();
-      if(!updatedProduct){
+      const updatedProduct = await Product.findByIdAndUpdate(
+        productId,
+        productBody,
+        {
+          new: true,
+        }
+      ).exec();
+      if (!updatedProduct) {
         return null;
       }
       return updatedProduct;
-      
     } catch (error) {
       console.error("Error updating product:", error);
       throw new Error("Error updating product");
     }
   }
 
-  async deleteProduct(productId:string){
+  async deleteProduct(productId: string) {
     try {
-      if(!Types.ObjectId.isValid(productId)){
-        throw new Error("Invalid Product ID")
+      if (!Types.ObjectId.isValid(productId)) {
+        throw new Error("Invalid Product ID");
       }
       const deletedProduct = await Product.findByIdAndDelete(productId).exec();
-      if(!deletedProduct){
+      if (!deletedProduct) {
         return null;
       }
       return deletedProduct;
     } catch (error) {
-      console.error("Error deleting product:",error);
+      console.error("Error deleting product:", error);
       throw new Error("Error deleting product");
     }
   }
@@ -101,16 +98,16 @@ async getProductsWithoutVideo(categoryId: string) {
   //category product
   async getProductsByCategory(categoryId: string) {
     return await Product.find({ categoryId });
-}
+  }
 
   //purchaseProduct
   async purchaseProduct(productId: string): Promise<void> {
     const product = await Product.findById(productId);
-    if(!product){
+    if (!product) {
       throw new Error("Product Not Found");
     }
-    await emailService.sendProductPurchaseEmail(product.name)
-  };
+    await emailService.sendProductPurchaseEmail(product.name);
+  }
 }
 
 export default new ProductService();

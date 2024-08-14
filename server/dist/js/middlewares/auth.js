@@ -7,7 +7,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const auth = (req, res, next) => {
     const token = req.header('x-auth-token');
     if (!token) {
-        return res.status(401).json({ message: 'No token, authorization denied' });
+        return res.status(401).json({ message: 'Token yok, yetkilendirme reddedildi' });
     }
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
@@ -15,7 +15,7 @@ const auth = (req, res, next) => {
         next();
     }
     catch (err) {
-        res.status(401).json({ message: 'Token is not valid' });
+        res.status(401).json({ message: 'Token geçerli degil' });
     }
 };
 exports.default = auth;

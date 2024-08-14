@@ -85,6 +85,7 @@ class ProductController {
           message: "Bu işlemi gerçekleştirme yetkiniz yok",
         });
       }
+
       const product = await productService.createProduct(req.body, _id as ObjectId); // _id'yi ekleyin
   
       if (!product) {
@@ -93,7 +94,6 @@ class ProductController {
           message: "Ürün oluşturulurken hata oluştu",
         });
       }
-  
       return res.status(201).json({
         success: true,
         product,
