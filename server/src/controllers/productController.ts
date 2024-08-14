@@ -85,7 +85,6 @@ class ProductController {
           message: "Bu işlemi gerçekleştirme yetkiniz yok",
         });
       }
-  
       const product = await productService.createProduct(req.body, _id as ObjectId); // _id'yi ekleyin
   
       if (!product) {
@@ -217,7 +216,6 @@ class ProductController {
     }
   }
   
-
   //product category
   async getProductsByCategory(req: Request, res: Response) {
     try {
@@ -226,29 +224,6 @@ class ProductController {
       res.json(products);
     } catch (error) {
       res.status(500).json({ error: "Ürünler getirilemedi" });
-    }
-  }
-
-  async getMostClickedProduct(req: Request, res: Response) {
-    try {
-      const mostClickedProduct = await productService.getMostClickedProduct();
-
-      if (!mostClickedProduct) {
-        return res.status(404).json({
-          success: false,
-          message: "Most clicked product not found",
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        product: mostClickedProduct,
-      });
-    } catch (error) {
-      console.error("Error fetching most clicked product:", error); // Hata loglama
-      return res.status(500).json({
-        success: false,
-        message: "Server Error",
-      });
     }
   }
 

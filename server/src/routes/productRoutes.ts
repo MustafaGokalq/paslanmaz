@@ -9,7 +9,6 @@ const router: Router = express.Router();
 router.get("/", productController.getAllProducts);
 router.get("/:id", productController.getProductById);
 router.get("/category/:categoryId/products", productController.getProductsByCategory);
-router.get("/click-most-product", productController.getMostClickedProduct);
 router.get("/category/:categoryId/products-with-video", productController.getProductsWithVideo);
 router.get("/category/:categoryId/products-without-video", productController.getProductsWithoutVideo);
 

@@ -1,3 +1,4 @@
+import mongoose, { Types } from "mongoose";
 import Admin from "../models/adminModel";
 import { IAdmin } from "../types/adminType";
 import jwt from "jsonwebtoken";
@@ -34,6 +35,8 @@ class AdminService {
     admin.password = newPassword;
     await admin.save();
   }
+
+ 
 }
 
 export default new AdminService();

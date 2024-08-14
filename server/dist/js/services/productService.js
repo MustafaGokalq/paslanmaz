@@ -69,7 +69,6 @@ class ProductService {
                     price: productBody.price,
                     imageUrl: productBody.imageUrl,
                     videoUrl: productBody.videoUrl,
-                    isClick: productBody.isClick,
                     categoryId: productBody.categoryId,
                     createdBy: productBody.createdBy,
                 };
@@ -124,23 +123,6 @@ class ProductService {
     getProductsByCategory(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield productModel_1.default.find({ categoryId });
-        });
-    }
-    //most click
-    getMostClickedProduct() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const mostClickedProduct = yield productModel_1.default.findOne()
-                    .sort({ clicks: -1 })
-                    .exec();
-                if (!mostClickedProduct)
-                    return null;
-                return mostClickedProduct;
-            }
-            catch (error) {
-                console.error("Error fetching most clicked product:", error);
-                throw new Error("Error fetching most clicked product");
-            }
         });
     }
     //purchaseProduct

@@ -235,30 +235,6 @@ class ProductController {
             }
         });
     }
-    getMostClickedProduct(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const mostClickedProduct = yield productService_1.default.getMostClickedProduct();
-                if (!mostClickedProduct) {
-                    return res.status(404).json({
-                        success: false,
-                        message: "Most clicked product not found",
-                    });
-                }
-                return res.status(200).json({
-                    success: true,
-                    product: mostClickedProduct,
-                });
-            }
-            catch (error) {
-                console.error("Error fetching most clicked product:", error); // Hata loglama
-                return res.status(500).json({
-                    success: false,
-                    message: "Server Error",
-                });
-            }
-        });
-    }
     purchase(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

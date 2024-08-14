@@ -7,7 +7,6 @@ interface IProduct extends Document{
     price?:string,
     imageUrl:string[],
     videoUrl?:string,
-    isClick:number,
     categoryId: mongoose.Schema.Types.ObjectId;
     createdBy: mongoose.Schema.Types.ObjectId;
    

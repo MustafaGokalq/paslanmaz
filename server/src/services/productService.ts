@@ -1,7 +1,7 @@
 import mongoose, { Types } from "mongoose";
 import Product from "../models/productModel";
-import IProduct from "../types/productType";
 import emailService from "../utils/emailService";
+import IProduct from "../types/productType";
 
 class ProductService {
   //videolu produclar
@@ -41,6 +41,7 @@ async getProductsWithoutVideo(categoryId: string) {
     }
   }
 
+   
   //create product
   async createProduct(productBody: IProduct, createdBy: mongoose.Schema.Types.ObjectId) {
     try {
@@ -50,7 +51,6 @@ async getProductsWithoutVideo(categoryId: string) {
         price: productBody.price,
         imageUrl: productBody.imageUrl,
         videoUrl: productBody.videoUrl,
-        isClick: productBody.isClick,
         categoryId: productBody.categoryId,
         createdBy: productBody.createdBy,
       };
@@ -102,22 +102,6 @@ async getProductsWithoutVideo(categoryId: string) {
   async getProductsByCategory(categoryId: string) {
     return await Product.find({ categoryId });
 }
-  
-  //most click
-  async getMostClickedProduct() {
-    try {
-      const mostClickedProduct = await Product.findOne()
-        .sort({ clicks: -1 })
-        .exec();
-
-      if (!mostClickedProduct) return null;
-
-      return mostClickedProduct;
-    } catch (error) {
-      console.error("Error fetching most clicked product:", error);
-      throw new Error("Error fetching most clicked product");
-    }
-  }
 
   //purchaseProduct
   async purchaseProduct(productId: string): Promise<void> {

@@ -30,7 +30,6 @@ const productSchema = new mongoose_1.Schema({
     price: { type: String, required: false },
     imageUrl: { type: [String], required: true },
     videoUrl: { type: String, required: false },
-    isClick: { type: Number, default: 0 },
     categoryId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "Category",

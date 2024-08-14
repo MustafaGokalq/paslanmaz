@@ -7,7 +7,6 @@ const productSchema: Schema<IProduct> = new Schema<IProduct>({
   price: { type: String, required: false },
   imageUrl: { type: [String], required: true },
   videoUrl: { type: String, required: false },
-  isClick: { type: Number, default: 0 },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",

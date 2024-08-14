@@ -17,4 +17,3 @@ const auth = (req: Request | any, res: Response, next: NextFunction) => {
 
 
 export default auth;
-

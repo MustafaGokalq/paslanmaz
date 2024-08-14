@@ -11,14 +11,15 @@ const index_1 = __importDefault(require("./routes/index"));
 const rateLimit_1 = __importDefault(require("./middlewares/rateLimit"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
-//middlewares
+const port = Number(process.env.PORT) || 3000;
+// Middlewares
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
+// Rate limiting middleware
 app.use("/api", rateLimit_1.default);
-//routes
+// API routes
 app.use("/api", index_1.default);
 app.listen(port, () => {
     (0, database_1.default)();
-    console.log("localhost running");
+    console.log(`Server running on port ${port}`);
 });
