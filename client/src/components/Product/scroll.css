@@ -1,0 +1,37 @@
+/* Custom Scrollbar CSS */
+.custom-scrollbar {
+    overflow-y: scroll; /* Her zaman kaydırma çubuğunu göster */
+  }
+  
+  /* Webkit tarayıcılar için (Chrome, Safari) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px; /* Kaydırma çubuğu genişliği */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #000; /* Kaydırma çubuğu yolu arka plan rengi */
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #000; /* Kaydırma çubuğu başparmak rengi */
+    border-radius: 10px;
+    border: 3px solid transparent; /* Kenar boşluğu ekleyerek başparmak rengini daha görünür kıl */
+    background-clip: content-box; /* Başparmak renginin kenar boşluğu ile ayrılması */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Başparmak üzerine gelindiğinde değişen renk */
+  }
+  
+  /* Firefox için */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+  }
+  
+  /* Microsoft Edge ve Internet Explorer için */
+  .custom-scrollbar {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  

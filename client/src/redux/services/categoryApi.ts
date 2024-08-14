@@ -1,16 +1,35 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { ICategory, ICategoryResponse } from '../../types/types';
 // import type { Pokemon } from './types'
 
 
 export const categoryApi = createApi({
-  reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+  reducerPath: 'categoryApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/categories' }),
   endpoints: (builder) => ({
-    getPokemonByName: builder.query<any, string>({
-      query: (name) => `pokemon/${name}`,
+
+    getAllCategories: builder.query<ICategoryResponse, void>({
+      query: () => {
+        return {
+          url: `/`,
+          method: "GET"
+        }
+      },
     }),
+
+
+    createCategory: builder.mutation<ICategoryResponse, ICategory>({
+      query: () => {
+        return {
+          url: `/`,
+          method: "POST"
+        }
+      },
+    }),
+
+
   }),
 })
 
 
-export const { useGetPokemonByNameQuery } = categoryApi
+export const { useGetAllCategoriesQuery, useCreateCategoryMutation } = categoryApi;
