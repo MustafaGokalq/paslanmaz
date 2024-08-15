@@ -43,19 +43,20 @@ class ProductService {
   }
 
   //create product
-async createProduct(productBody: IProduct, createdBy: mongoose.Schema.Types.ObjectId) {
+  async createProduct(
+    productBody: IProduct,
+    createdBy: mongoose.Schema.Types.ObjectId
+  ) {
     try {
       console.log("Product Body in Service:", productBody);
-        const product = await Product.create(productBody);
-        
-        return product;
+      const product = await Product.create(productBody);
+
+      return product;
     } catch (error) {
-        console.error("Ürün oluşturulurken hata oluştu:", error);
-        throw new Error("Ürün oluşturulurken hata oluştu");
+      console.error("Ürün oluşturulurken hata oluştu:", error);
+      throw new Error("Ürün oluşturulurken hata oluştu");
     }
-}
-
-
+  }
 
   async updateProduct(productId: string, productBody: Partial<IProduct>) {
     try {
